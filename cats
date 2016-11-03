@@ -1,0 +1,15 @@
+title
+year
+runtime
+genre
+director
+actors
+imdbRating
+rated
+poster
+type
+tomatoConsensus
+tomatoMeter
+avg
+website
+plot

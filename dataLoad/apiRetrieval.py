@@ -6,8 +6,6 @@ with open("txtonly.txt", "r") as movieString:
     data = movieString.read().replace('\n', '')
     data = data.split("linebrk")
 
-response = requests.get("http://www.omdbapi.com/?t=Snatch&y=&plot=short&r=json&callback=?&tomatoes=true")
-
 class Movie:
     def __init__(self, title, year, rated, runtime, imdbRating, tomatoMeter, tomatoConsensus, genre, director, actors, metascore, poster, movType, avg, website, plot):
         self.title = title
@@ -34,7 +32,7 @@ tmdb.API_KEY = "0a2c6dbffb29cf4e880ed6985f5a7233"
 search = tmdb.Search()
 response = search.movie(query="Snatch")
 search.results[0].get('poster_path')
-myDict.update({"four": 4})
+#myDict.update({"four": 4})
 
 from socket import error as SocketError
 import errno
@@ -42,8 +40,6 @@ def getMovieInfo(movieName):
     movie = movieName.strip()
     url = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&r=json&callback=?&tomatoes=true"
     url2 = "http://api.themoviedb.org/3/search/movie?query=" + movie + "&api_key=0a2c6dbffb29cf4e880ed6985f5a7233" 
-    posterStart = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"
-    # myDict.update({"hiya":"ok"})
     try:
         response = requests.get(url)
         almostReadyResponse = response.content[2:-2]
@@ -55,13 +51,29 @@ def getMovieInfo(movieName):
             raise
         pass
 
+import tmdbsimple as tmdb
+tmdb.API_KEY = "0a2c6dbffb29cf4e880ed6985f5a7233"
+search = tmdb.Search()
+def getMoviePoster(movie):
+    posterStart = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"
+    try: 
+        response = search.movie(query=movie)
+        return posterStart + search.results[0].get('poster_path')
+    except SocketError as e:
+        if e.errno != errno.ECONNRESET:
+            raise
+        pass
+
+import time
 def getAllMovieInfo(aList):
     global movies
     for movie in aList:
         addThis =  getMovieInfo(movie)
-        if addThis:
+        if addThis:        
+            addThis["Poster"] = getMoviePoster(movie)
             movies.append(addThis)
-
+        time.sleep(.255)
+        # API only accepts 40 calls per 10 seconds
 # getAllMovieInfo(data)
 '''
 with open("ready.txt", "w") as ready:

@@ -64,10 +64,11 @@ def getMoviePoster(movie):
     except (SocketError, IndexError) as e: 
         pass
     
-
+previousMovie = ""
 import time
 def getAllMovieInfo(aList):
     global movies
+    global previousMovie
     x = 0
     for movie in aList:
         dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
@@ -75,9 +76,11 @@ def getAllMovieInfo(aList):
         if addThis:        
             addThis["Poster"] = getMoviePoster(movie)
             dictTemplate["fields"] = addThis
-            movies.append(dictTemplate)
-            print(addThis)
-            x += 1        
+            if dictTemplate != previousMovie:
+                movies.append(dictTemplate)
+                print(addThis)
+                x += 1
+        previousMovie = dictTemplate        
         time.sleep(.25)
         # API only accepts 40 calls per 10 seconds
 

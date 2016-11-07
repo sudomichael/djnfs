@@ -68,18 +68,23 @@ def getMoviePoster(movie):
 import time
 def getAllMovieInfo(aList):
     global movies
+    x = 0
     for movie in aList:
+        dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
         addThis =  getMovieInfo(movie)
         if addThis:        
             addThis["Poster"] = getMoviePoster(movie)
-            movies.append(addThis)
+            dictTemplate["fields"] = addThis
+            movies.append(dictTemplate)
             print(addThis)
+            x += 1        
         time.sleep(.25)
         # API only accepts 40 calls per 10 seconds
 
 getAllMovieInfo(data)
-with open("ready.txt", "w") as ready:
-   for movie in movies:
-       ready.write(movie + ",") 
 
+import json
+with open("ready.json", "w") as ready:
+   json.dump(movies, ready) 
 
+# cannot add string + dict

@@ -30,8 +30,8 @@ movies = []
 import tmdbsimple as tmdb
 tmdb.API_KEY = "0a2c6dbffb29cf4e880ed6985f5a7233"
 search = tmdb.Search()
-response = search.movie(query="Snatch")
-search.results[0].get('poster_path')
+#response = search.movie(query="Snatch")
+#search.results[0].get('poster_path')
 #myDict.update({"four": 4})
 
 from socket import error as SocketError
@@ -58,11 +58,12 @@ def getMoviePoster(movie):
     posterStart = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"
     try: 
         response = search.movie(query=movie)
-        return posterStart + search.results[0].get('poster_path')
-    except SocketError as e:
-        if e.errno != errno.ECONNRESET:
-            raise
+        if type(search.results) is list:
+            if search.results[0].get('poster_path'):
+                return posterStart + search.results[0].get('poster_path')
+    except (SocketError, IndexError) as e: 
         pass
+    
 
 import time
 def getAllMovieInfo(aList):
@@ -72,11 +73,13 @@ def getAllMovieInfo(aList):
         if addThis:        
             addThis["Poster"] = getMoviePoster(movie)
             movies.append(addThis)
-        time.sleep(.255)
+            print(addThis)
+        time.sleep(.25)
         # API only accepts 40 calls per 10 seconds
-# getAllMovieInfo(data)
-'''
+
+getAllMovieInfo(data)
 with open("ready.txt", "w") as ready:
-    ready.write(movies)
-'''
+   for movie in movies:
+       ready.write(movie + ",") 
+
 

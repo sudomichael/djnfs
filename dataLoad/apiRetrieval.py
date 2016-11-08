@@ -44,7 +44,10 @@ def getMovieInfo(movieName):
         response = requests.get(url)
         almostReadyResponse = response.content[2:-2]
         readyResponse = eval(almostReadyResponse)
-        
+        readyResponse['imdbRating'] = float(readyResponse['imdbRating'])
+        readyResponse['tomatoMeter'] = int(readyResponse['tomatoMeter'])
+        readyResponse['tomatoUserMeter'] = int(readyResponse['tomatoUserMeter'])
+        readyResponse['Year'] = int(readyResponse['Year'])
         return(readyResponse)
     except SocketError as e:
         if e.errno != errno.ECONNRESET:

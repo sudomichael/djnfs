@@ -43,4 +43,4 @@ class Movie(models.Model):
     Rated = models.TextField(null=True)
 
     def __str__(self):
-        return self.title                     
+        return self.Title                     

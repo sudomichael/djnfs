@@ -13,13 +13,15 @@ class Movie(models.Model):
     actors = models.TextField()
     imdbRating = models.CharField()
     rated = models.CharField()
-    poster = models.TextField()
+    Poster = models.TextField()
     movType = models.CharField()
     tomatoConsensus = models.TextField()
     tomatoMeter = models.CharField()
     avg = models.CharField()
     website = models.TextField()
-    plot = models.TextField
-
+    plot = models.TextField()
+    Error = models.TextField()
+    Response = models.TextField()
+    
     def __str__(self):
         return self.title

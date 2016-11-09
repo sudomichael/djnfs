@@ -30,9 +30,6 @@ movies = []
 import tmdbsimple as tmdb
 tmdb.API_KEY = "0a2c6dbffb29cf4e880ed6985f5a7233"
 search = tmdb.Search()
-#response = search.movie(query="Snatch")
-#search.results[0].get('poster_path')
-#myDict.update({"four": 4})
 
 from socket import error as SocketError
 import errno
@@ -44,10 +41,6 @@ def getMovieInfo(movieName):
         response = requests.get(url)
         almostReadyResponse = response.content[2:-2]
         readyResponse = eval(almostReadyResponse)
-        readyResponse['imdbRating'] = float(readyResponse['imdbRating'])
-        readyResponse['tomatoMeter'] = int(readyResponse['tomatoMeter'])
-        readyResponse['tomatoUserMeter'] = int(readyResponse['tomatoUserMeter'])
-        readyResponse['Year'] = int(readyResponse['Year'])
         return(readyResponse)
     except SocketError as e:
         if e.errno != errno.ECONNRESET:
@@ -66,8 +59,30 @@ def getMoviePoster(movie):
                 return posterStart + search.results[0].get('poster_path')
     except (SocketError, IndexError) as e: 
         pass
-    
-previousMovie = ""
+
+def changeAttributeTypes(movie):
+    try:   
+        movie["Poster"] = getMoviePoster(movie)
+    except ValueError:
+        pass
+    try:
+        movie["imdbRating"] = float(movie["imdbRating"])
+    except ValueError:
+        pass
+    try:    
+        movie["tomatoMeter"] = int(movie["tomatoMeter"])
+    except ValueError:
+        pass    
+    try:
+        movie["tomatoUserMeter"] = int(movie["tomatoUserMeter"])
+    except ValueError:
+        pass
+    try:    
+        movie["Year"] = int(movie["Year"])
+    except ValueError:
+        pass
+    return movie 
+previousMovie = "startValue"
 import time
 def getAllMovieInfo(aList):
     global movies
@@ -76,14 +91,13 @@ def getAllMovieInfo(aList):
     for movie in aList:
         dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
         addThis =  getMovieInfo(movie)
-        if addThis:        
-            addThis["Poster"] = getMoviePoster(movie)
-            dictTemplate["fields"] = addThis
-            if dictTemplate != previousMovie:
-                movies.append(dictTemplate)
-                print(addThis)
-                x += 1
-        previousMovie = dictTemplate        
+        if addThis['Response'] is 'True':        
+           dictTemplate["fields"] = changeAttributeTypes(addThis) 
+           if dictTemplate["fields"] != previousMovie["fields"]:
+               movies.append(dictTemplate)
+               print(addThis["Title"])
+               x += 1
+        previousMovie = dictTemplate                
         time.sleep(.25)
         # API only accepts 40 calls per 10 seconds
 

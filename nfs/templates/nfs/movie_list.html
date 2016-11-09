@@ -1,3 +1,11 @@
-<html>
-    <p>It works</p>
-</html>
+{% extends 'nfs/base.html' %}
+
+{% block content %}
+    {% for movie in movies %}
+        <div class="movie">
+            <h3><a href-"">{{ movie.Title }}</a></h1>
+            <p>TomatoMeter: {{ movie.tomatoMeter }}</p>
+            <p>imdb: {{ movie.imdbRating }} </p>
+        </div>
+    {% endfor %} 
+{% endblock %}

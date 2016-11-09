@@ -81,6 +81,10 @@ def changeAttributeTypes(movie):
         movie["Year"] = int(movie["Year"])
     except ValueError:
         pass
+    try:
+        movie["Metascore"] = int(movie["Metascore"])
+    except ValueError:
+        pass
     return movie 
 previousMovie = "startValue"
 import time

@@ -41,6 +41,7 @@ class Movie(models.Model):
     tomatoUserReviews = models.TextField(null=True)
     Writer = models.TextField(null=True)
     Rated = models.TextField(null=True)
+    average = models.TextField(null=True)
 
     def __str__(self):
         return self.title                     

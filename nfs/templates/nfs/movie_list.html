@@ -1,11 +1,24 @@
 {% extends 'nfs/base.html' %}
 
 {% block content %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Tomato Rating</th>
+      <th>IMDb Rating</th>
+      <th>Metascore</th>
+      <th>Average</th>
+    </tr>
+  </thead>
+  <tbody>
     {% for movie in movies %}
-        <div class="movie">
-            <h3><a href-"">{{ movie.Title }}</a></h1>
-            <p>TomatoMeter: {{ movie.tomatoMeter }}</p>
-            <p>imdb: {{ movie.imdbRating }} </p>
-        </div>
+     <tr>
+           <td><a href="">{{ movie.Title }}</a> ({{ movie.Year }})</td>
+           <td>{{ movie.tomatoMeter }}</td>
+           <td>{{ movie.imdbRating }}</td>
+           <td>{{ movie.Metascore }}<td>
+      </tr>
     {% endfor %} 
 {% endblock %}
+</table>

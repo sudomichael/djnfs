@@ -60,30 +60,59 @@ def getMoviePoster(movie):
     except (SocketError, IndexError) as e: 
         pass
 
+import re
 def changeAttributeTypes(movie):
     try:   
         movie["Poster"] = getMoviePoster(movie)
     except ValueError:
+        movie["Poster"] = 0
         pass
     try:
         movie["imdbRating"] = float(movie["imdbRating"])
     except ValueError:
+        movie["imdbRating"] = 0 
         pass
     try:    
         movie["tomatoMeter"] = int(movie["tomatoMeter"])
     except ValueError:
+        movie["tomatoMeter"] = 0
         pass    
     try:
         movie["tomatoUserMeter"] = int(movie["tomatoUserMeter"])
     except ValueError:
+        movie["tomatoUserMeter"] = 0
         pass
     try:    
         movie["Year"] = int(movie["Year"])
     except ValueError:
+        movie["Year"] = 0
         pass
     try:
         movie["Metascore"] = int(movie["Metascore"])
     except ValueError:
+        movie["Metascore"] = 0
+        pass
+    try:
+        divideBy = 0
+        if movie["Metascore"] != 0:
+            divideBy += 1
+        if movie["tomatoMeter"] != 0:
+            divideBy += 1
+        if movie["imdbRating"] != 0:
+            divideBy += 1
+        
+        movie["average"] = (movie["Metascore"] + movie["tomatoMeter"] + movie["imdbRating"]) / divideBy
+    except ZeroDivisionError:
+        movie["average"] = 0
+        pass
+    try:
+        runtime = movie["Runtime"]
+        runtime = re.findall('\d+', runtime)
+        if int(runtime[0]) > 60:
+            movie["kind"] = "movie"
+        else:
+            movie["kind"] = "show"
+    except IndexError:
         pass
     return movie 
 previousMovie = "startValue"
@@ -102,7 +131,7 @@ def getAllMovieInfo(aList):
                print(addThis["Title"])
                x += 1
         previousMovie = dictTemplate                
-        time.sleep(.25)
+        time.sleep(.10)
         # API only accepts 40 calls per 10 seconds
 
 getAllMovieInfo(data)

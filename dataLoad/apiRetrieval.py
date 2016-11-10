@@ -101,7 +101,7 @@ def changeAttributeTypes(movie):
         if movie["imdbRating"] != 0:
             divideBy += 1
         
-        movie["average"] = (movie["Metascore"] + movie["tomatoMeter"] + movie["imdbRating"]) / divideBy
+        movie["average"] = round(((movie["Metascore"] + movie["tomatoMeter"] + (movie["imdbRating"] * 10)) / divideBy), 1)
     except ZeroDivisionError:
         movie["average"] = 0
         pass

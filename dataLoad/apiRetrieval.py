@@ -131,7 +131,7 @@ def getAllMovieInfo(aList):
                print(addThis["Title"])
                x += 1
         previousMovie = dictTemplate                
-        time.sleep(.10)
+        time.sleep(.20)
         # API only accepts 40 calls per 10 seconds
 
 getAllMovieInfo(data)

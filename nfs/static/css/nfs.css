@@ -2,6 +2,44 @@
     margin: auto;
 }
 
+ul {
+    float:right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
+li {
+    float: left;
+}
 
+li a {
+    height: 48px;
+    padding: 8px;
+    font-size: 20px;
+    display: block;
+    background-color: #dddddd;
+}
 
+body{
+    padding-top: 40px;
+}
+
+#title{
+    font-size: 34px;   
+}
+
+.content{
+    margin-left: 45px;
+    float:center;
+    position: relative;
+}
+
+td{
+    text-align: center;
+}
+
+.title{
+    text-align: left;
+}

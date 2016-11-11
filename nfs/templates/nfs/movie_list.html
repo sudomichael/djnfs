@@ -17,7 +17,7 @@
   <tbody>
     {% for movie in movies %}
      <tr>
-           <td><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.Title }}</a> ({{ movie.Year }})</td>
+           <td class="title"><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.Title }}</a> ({{ movie.Year }})</td>
            <td>{{ movie.tomatoMeter }}</td>
            <td>{{ movie.imdbRating }}</td>
            <td>{{ movie.Metascore }}</td>

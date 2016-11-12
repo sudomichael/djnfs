@@ -16,9 +16,9 @@ class pageInfo(object):
         self.avgurl = avg
         self.title = title
 
-homePageInfo = pageInfo('movie_list_rt', 'movie_list_imdb', 'movie_list_mc', 'movie_list', "Top Movies on Netflix Right Now")
+homePageInfo = pageInfo('movie_list_rt', 'movie_list_imdb', 'movie_list_mc', 'movie_list', "Top Rated Content on Netflix Right Now")
 
-moviePageInfo = pageInfo('movies_main_rt', 'movies_main_imdb', 'movies_main_mc', 'movies_main_avg', 'Best Movies Airing on Netflix')
+moviePageInfo = pageInfo('movies_main_rt', 'movies_main_imdb', 'movies_main_mc', 'movies_main_avg', 'Best Movies on Netflix')
 
 def movie_list(request):
     movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).order_by('-average')[:50]
@@ -56,5 +56,11 @@ def movies_main_mc(request):
     movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type='movie').order_by('-Metascore')[:50]
     return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':moviePageInfo})
 
+def movies_action_avg(request):
+    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type='movie').filter(Genre__contains="Action").order_by('-average')[:50]
+    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':actionMoviePageInfo})
+
+
+actionMoviePageInfo = pageInfo('movies_main_rt', 'movies_main_imdb', 'movies_main_mc', 'movies_main_avg', 'Best Action Movies on Netflix')
 
 

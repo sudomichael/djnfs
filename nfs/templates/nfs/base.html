@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <script src="https://use.fontawesome.com/b2bb0753f9.js"></script>
         <link rel="stylesheet" href="{% static 'css/nfs.css' %}">
     </head>
     <body>
@@ -13,10 +14,31 @@
             <a id="title" href="/">Netflix Wizard</a>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="{% url 'movies_main_avg' %}">Top Movies</a></li>
+                <li class="dropdown">
+                  <a href="{% url 'movies_main_avg' %}" class="dropbtn">Top Movies</a>
+                <div class="dropdown-content">
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>     
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>    
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                  <a href="{% url 'movies_action_avg' %}">Action Movies</a>
+                     
+               </div>
+                </li>
                 <li><a href="">Top Shows</a></li>
                 <li><a href="">About</a></li>
-            </ul>
+           </ul>
           </div>
         </nav>
 

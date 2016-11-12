@@ -11,12 +11,12 @@
       <th><a href="{% url pageInfo.rturl %}"> Tomato Rating</a></th>
       <th><a href="{% url pageInfo.imdburl %}">IMDb Rating</a></th>
       <th><a href="{% url pageInfo.mcurl %}">Metascore</a></th>
-      <th><a href="{% url pageInfo.avgurl %}">Average</a></th>
+      <th><a href="{% url pageInfo.avgurl %}">Average <i class="fa fa-sort" aria-hidden="true"></i></a></th>
     </tr>
   </thead>
   <tbody>
     {% for movie in movies %}
-     <tr>
+      <tr>
            <td class="title"><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.Title }}</a> ({{ movie.Year }})</td>
            <td>{{ movie.tomatoMeter }}</td>
            <td>{{ movie.imdbRating }}</td>

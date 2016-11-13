@@ -1,8 +1,103 @@
 {% extends 'nfs/base.html' %}
 
 {% block content %}
-    <div class="movie">
-        <h1>{{ movie.Title }}</h1>
+        <div class-"fb-btn">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1223706618260587"
+     data-ad-slot="3816252550"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<hr> 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <style>
+        .container{
+            color:grey;
+        }
+        
+        .score{
+            text-align: left;
+        }
+       
+        .fb-btn{
+            text-align: center;
+        }
+      
+    </style>
+    <div class="container">
+
+        <!-- Heading Row -->
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-responsive img-rounded" src="{{ movie.Poster }}" alt=""> 
+            <div class="fb-btn">
+            <div class="fb-share-button" data-href="http://www.netflixwizard.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.netflixwizard.com%2F&amp;src=sdkpreparse">Share</a></div> </div>
+ 
+            </div>
+            <!-- /.col-md-8 -->
+            <div class="col-md-8">
+                <h1>{{ movie.Title }}</h1> 
+                <p>&nbsp;{{ movie.Year }} // {{ movie.Genre }} // {{ movie.Runtime }} // {{ movie.Rated }}
+                <h4>Plot</h4>
+                <p>&nbsp;{{ movie.Plot }}</p>
+                <h4>Director</h4>
+                 <p>&nbsp; {{ movie.Director }}</p>
+                 <h4>Cast</h4> 
+                 <p>&nbsp; {{ movie.Actors }}</p>
+            <div class="col-md-6">
+                <h4 class="score">Rotten Tomatoes: {{ movie.tomatoMeter }}</h4>
+                <h4 class="score">Metacritic: {{ movie.Metascore }} </h4>
+                <h4 class="score">IMDb: {{ movie.imdbRating }}</h4>
+                <hr></hr>
+                <h4 class="score">Average: {{ movie.average }}</h4>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-6">
+                <h4>What they're saying -</h4>
+                <p>{{ movie.tomatoConsensus }}</p>
+            </div>
+            </div>
+                          </div>
+</a>
+           </div>
+        </div>
+
+        <hr>
+
+        <!-- Call to Action Well -->
+        <div class-"fb-btn">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-1223706618260587"
+     data-ad-slot="3816252550"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+                       <!-- /.row -->
+
+
     </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
 {% endblock %}
 

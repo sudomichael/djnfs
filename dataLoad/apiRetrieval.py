@@ -56,6 +56,7 @@ def getMoviePoster(movie):
         response = search.movie(query=movie)
         if type(search.results) is list:
             if search.results[0].get('poster_path'):
+                print(posterStart + search.results[0].get('poster_path'))
                 return posterStart + search.results[0].get('poster_path')
     except (SocketError, IndexError) as e: 
         pass
@@ -64,6 +65,8 @@ import re
 def changeAttributeTypes(movie):
     try:   
         movie["Poster"] = getMoviePoster(movie)
+        if movie["Website"] == "N/A":
+            movie["Website"] = "/"
     except ValueError:
         movie["Poster"] = 0
         pass
@@ -100,7 +103,6 @@ def changeAttributeTypes(movie):
             divideBy += 1
         if movie["imdbRating"] != 0:
             divideBy += 1
-        
         movie["average"] = round(((movie["Metascore"] + movie["tomatoMeter"] + (movie["imdbRating"] * 10)) / divideBy), 1)
     except ZeroDivisionError:
         movie["average"] = 0

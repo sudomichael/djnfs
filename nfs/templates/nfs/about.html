@@ -1,0 +1,42 @@
+{% extends 'nfs/base.html' %}
+
+{% block content %}
+
+<style>
+       .about, td{
+           text-align: center;
+           color: grey;
+           padding-top: 30px;
+       }
+       a{
+           cursor: pointer;
+       }
+ </style>     
+
+<div class="about">
+<h1>Netflix Wizard</h1>
+<p> Choosing what to watch made easy</p>
+<h3>Scenario</h3>
+<p>You have decided you want to watch a movie. Maybe it&#39;s raining outside, maybe you&#39;re sick, maybe you just want an escape. Whatever the case - you can&#39;t decide what to watch. There&#39;s two ways this can play out. <br></p>
+<table align='center' width='800'> 
+<tr>
+<td><center><h3>You don&#39;t check Netflix Wizard</h3></center></td>
+<td><center><h3>You check Netflix Wizard</h3></center></td>
+</tr>
+<tr>
+<td>
+ You decide to just go for it, you choose the first movie that sounds appealing and at the end of it you are so dissapointed by the previous 2 hours of your life that you can&#39;t stop screaming in rage, your neighbors call the police because they&#39;re worried about their friend who, two hours ago, was a pretty nice person. The cops arrive, you&#39;re still in a manic rage, and the next morning you find yourself bruised and in a jail cell.</p>
+</td>
+<td>
+After checking Netflix Wizard, you realize that there&#39;s a movie that is extraordinarily well reviewed. You decide to watch it. The movie ends. It inspires you. You have an epiphany. You get your act together, start that business, and 1 year later find yourself relaxing on your new yacht overlooking the vast expanse of the Balearic Sea en route to Ibiza.
+</td>
+</tr>
+</table>
+<p>You see? The choice is clear. You should use Netflix Wizard to help you find what to watch on Netflix. </p>
+<br>
+<p>This product uses the <a href="http://www.themoviedb.org/">TMDb API</a> but is not endorsed or certified by TMDb.</p>
+<p> NetflixWizard makes it easy to filter through the muck and watch the highest regarded films on Netflix</p>
+<a href="../"><h3>Click to return to Netflix Wizard<h3></a>
+</div>
+
+{% endblock %}

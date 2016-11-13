@@ -77,4 +77,5 @@ def shows_genre(request, **kwargs):
         shows = Movie.objects.filter(kind=kind).order_by(sortBy)[:50]
     return render(request, 'nfs/movie_list.html', {'movies': shows, 'pageInfo':thisPageInfo})
 
-
+def about(request):
+    return render(request, 'nfs/about.html')

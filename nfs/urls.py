@@ -143,6 +143,6 @@ urlpatterns = [
     url(r'^netflixshows/war/rt$', views.shows_genre, {'category': "War", "sortBy": "-tomatoMeter", "urlTheme": "war", "kind": "show"}, name="shows_war_rt"),
     url(r'^netflixshows/warl/imdb$', views.shows_genre, {'category': "War", "sortBy": "-imdbRating", "urlTheme": "war", "kind": "show"}, name="shows_war_imdb"),
     url(r'^netflixshows/war/mc$', views.shows_genre, {'category': "War", "sortBy": "-Metascore", "urlTheme": "war", "kind": "show"}, name="shows_war_mc"),
-    
+   url(r'^about$', views.about, name="about"), 
     
 ]   

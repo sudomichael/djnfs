@@ -53,7 +53,7 @@ search = tmdb.Search()
 def getMoviePoster(movie):
     posterStart = "https://image.tmdb.org/t/p/w300_and_h450_bestv2"
     try: 
-        response = search.movie(query=movie)
+        response = search.movie(query=movie["Title"])
         if type(search.results) is list:
             if search.results[0].get('poster_path'):
                 print(posterStart + search.results[0].get('poster_path'))
@@ -64,7 +64,6 @@ def getMoviePoster(movie):
 import re
 def changeAttributeTypes(movie):
     try:   
-        movie["Poster"] = getMoviePoster(movie)
         if movie["Website"] == "N/A":
             movie["Website"] = "/"
     except ValueError:
@@ -127,13 +126,15 @@ def getAllMovieInfo(aList):
         dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
         addThis =  getMovieInfo(movie)
         if addThis['Response'] is 'True':        
+           addThis['Poster'] = getMoviePoster(addThis)
            dictTemplate["fields"] = changeAttributeTypes(addThis) 
            if dictTemplate["fields"] != previousMovie["fields"]:
                movies.append(dictTemplate)
                print(addThis["Title"])
+               print(addThis["Poster"])
                x += 1
         previousMovie = dictTemplate                
-        time.sleep(.20)
+        time.sleep(.22)
         # API only accepts 40 calls per 10 seconds
 
 getAllMovieInfo(data)

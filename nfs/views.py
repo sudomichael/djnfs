@@ -65,7 +65,16 @@ def movies_genre(request, **kwargs):
     movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=kind).filter(Genre__contains=category).order_by(sortBy)[:50]
     return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':thisPageInfo})
 
-
-#actionMoviePageInfo = pageInfo('movies_main_rt', 'movies_main_imdb', 'movies_main_mc', 'movies_main_avg', 'Best Action Movies on Netflix')
+def shows_genre(request, **kwargs):
+    category = kwargs.get("category", None)
+    sortBy = kwargs.get("sortBy", None)
+    urlTheme = kwargs.get("urlTheme", None)
+    kind = kwargs.get("kind", None)
+    thisPageInfo = pageInfo("shows_" + urlTheme + "_rt", "shows_" + urlTheme + "_imdb", "shows_" + urlTheme + "_mc", "shows_" + urlTheme + "_avg", "Best " + category.title() + " Shows on Netflix Now")
+    if category != "all":
+        shows = Movie.objects.filter(kind=kind).filter(Genre__contains=category).order_by(sortBy)[:50]
+    else:
+        shows = Movie.objects.filter(kind=kind).order_by(sortBy)[:50]
+    return render(request, 'nfs/movie_list.html', {'movies': shows, 'pageInfo':thisPageInfo})
 
 

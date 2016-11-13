@@ -36,11 +36,26 @@
                   <a href="{% url 'movies_sports_avg' %}">Sports</a>
                   <a href="{% url 'movies_thriller_avg' %}">Thriller</a>
                   <a href="{% url 'movies_war_avg' %}">War</a>
-                  <a href="{% url 'movies_western_avg' %}">Western</a>
-                  
+                  <a href="{% url 'movies_western_avg' %}">Western</a> 
                </div>
                 </li>
-                <li><a href="">Top Shows</a></li>
+                <li class="dropdown"><a href="">Top Shows</a>
+                  <div class="dropdown-content">
+                      <a href="{% url 'shows_all_avg' %}">All</a>
+                      <a href="{% url 'shows_action_avg' %}">Action</a>
+                      <a href="{% url 'shows_adventure_avg' %}">Adventure</a>
+                      <a href="{% url 'shows_anime_avg' %}">Animation</a>
+                      <a href="{% url 'shows_comedy_avg' %}">Comedy</a>
+                      <a href="{% url 'shows_crime_avg' %}">Crime</a>
+                      <a href="{% url 'shows_documentary_avg' %}">Documentary</a>
+                      <a href="{% url 'shows_family_avg' %}">Family</a>
+                      <a href="{% url 'shows_fantasy_avg' %}">Fantasy</a>
+                      <a href="{% url 'shows_horror_avg' %}">Horror</a>
+                      <a href="{% url 'shows_music_avg' %}">Music</a>
+                      <a href="{% url 'shows_reality_avg' %}">Reality-TV</a>
+                      <a href="{% url 'shows_war_avg' %}">War</a>
+                  </div>
+                </li>
                 <li><a href="">About</a></li>
            </ul>
           </div>

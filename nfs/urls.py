@@ -144,5 +144,6 @@ urlpatterns = [
     url(r'^netflixshows/warl/imdb$', views.shows_genre, {'category': "War", "sortBy": "-imdbRating", "urlTheme": "war", "kind": "show"}, name="shows_war_imdb"),
     url(r'^netflixshows/war/mc$', views.shows_genre, {'category': "War", "sortBy": "-Metascore", "urlTheme": "war", "kind": "show"}, name="shows_war_mc"),
    url(r'^about$', views.about, name="about"), 
-    
+   url(r'^privacy$', views.privacy, name="privacy_policy"),
+   url(r'^contact$', views.contact, name="contact"), 
 ]   

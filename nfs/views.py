@@ -79,3 +79,9 @@ def shows_genre(request, **kwargs):
 
 def about(request):
     return render(request, 'nfs/about.html')
+
+def privacy(request):
+    return render(request, 'nfs/privacy.html')
+
+def contact(request):
+    return render(request, 'nfs/contact.html')

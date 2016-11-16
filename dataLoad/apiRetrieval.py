@@ -56,7 +56,6 @@ def getMoviePoster(movie):
         response = search.movie(query=movie["Title"])
         if type(search.results) is list:
             if search.results[0].get('poster_path'):
-                print(posterStart + search.results[0].get('poster_path'))
                 return posterStart + search.results[0].get('poster_path')
     except (SocketError, IndexError) as e: 
         pass
@@ -85,7 +84,8 @@ def changeAttributeTypes(movie):
         movie["tomatoUserMeter"] = 0
         pass
     try:    
-        movie["Year"] = int(movie["Year"])
+        yearString = movie["Year"][:4]
+        movie["Year"] = int(yearString)
     except ValueError:
         movie["Year"] = 0
         pass
@@ -111,6 +111,8 @@ def changeAttributeTypes(movie):
         runtime = re.findall('\d+', runtime)
         if int(runtime[0]) > 60:
             movie["kind"] = "movie"
+        elif runtime[0] == "N/A":
+            movie["kind"] = "show"
         else:
             movie["kind"] = "show"
     except IndexError:
@@ -131,7 +133,6 @@ def getAllMovieInfo(aList):
            if dictTemplate["fields"] != previousMovie["fields"]:
                movies.append(dictTemplate)
                print(addThis["Title"])
-               print(addThis["Poster"])
                x += 1
         previousMovie = dictTemplate                
         time.sleep(.22)

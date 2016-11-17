@@ -28,7 +28,7 @@ def movies_genre(request, **kwargs):
     Type = kwargs.get("Type", None)
     thisPageInfo = pageInfo("movies_" + urlTheme + "_rt", "movies_" + urlTheme +"_imdb", "movies_" + urlTheme + "_mc", "movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now")
     if country != "usa":
-        thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now")
+        thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now in " + country.title())
     if category != "all":
         movies = Movie.objects.filter(Genre__contains=category).filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
     else:
@@ -43,7 +43,7 @@ def shows_genre(request, **kwargs):
     Type = kwargs.get("Type", None)
     thisPageInfo = pageInfo("shows_" + urlTheme + "_rt", "shows_" + urlTheme + "_imdb", "shows_" + urlTheme + "_mc", "shows_" + urlTheme + "_avg", "Best " + category.title() + " Shows on Netflix Now")
     if country != "usa":
-        thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now")
+        thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now in " + country.title())
     if category != "all":
         shows = Movie.objects.filter(kind=country).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
     else:

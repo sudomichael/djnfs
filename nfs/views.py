@@ -16,65 +16,38 @@ class pageInfo(object):
         self.avgurl = avg
         self.title = title
 
-homePageInfo = pageInfo('movie_list_rt', 'movie_list_imdb', 'movie_list_mc', 'movie_list', "Top Rated Content on Netflix Right Now")
-
-moviePageInfo = pageInfo('movies_main_rt', 'movies_main_imdb', 'movies_main_mc', 'movies_main_avg', 'Best Movies on Netflix')
-
-def movie_list(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).order_by('-average')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':homePageInfo})
-
-def movie_list_rt(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).order_by('-tomatoMeter')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':homePageInfo})
-
-def movie_list_imdb(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).order_by('-imdbRating')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':homePageInfo})
-
-def movie_list_mc(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).order_by('-Metascore')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':homePageInfo})
-
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     return render(request, 'nfs/movie_detail.html', {'movie': movie})
 
-def movies_main_avg(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type='movie').order_by('-average')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':moviePageInfo})
-
-def movies_main_rt(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type='movie').order_by('-tomatoMeter')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':moviePageInfo})
-
-def movies_main_imdb(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type='movie').order_by('-imdbRating')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':moviePageInfo})
-
-def movies_main_mc(request):
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type='movie').order_by('-Metascore')[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':moviePageInfo})
-
 def movies_genre(request, **kwargs):
+    country = kwargs.get("kind", None)
     category = kwargs.get("category", None)
     sortBy = kwargs.get("sortBy", None)
     urlTheme = kwargs.get("urlTheme", None)
-    kind = kwargs.get("kind", None)
+    Type = kwargs.get("Type", None)
     thisPageInfo = pageInfo("movies_" + urlTheme + "_rt", "movies_" + urlTheme +"_imdb", "movies_" + urlTheme + "_mc", "movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now")
-    movies = Movie.objects.filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=kind).filter(Genre__contains=category).order_by(sortBy)[:50]
+    if country != "usa":
+        thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now")
+    if category != "all":
+        movies = Movie.objects.filter(Genre__contains=category).filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
+    else:
+        movies = Movie.objects.filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).order_by(sortBy)[:50]
     return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':thisPageInfo})
 
 def shows_genre(request, **kwargs):
+    country = kwargs.get("kind", None)
     category = kwargs.get("category", None)
     sortBy = kwargs.get("sortBy", None)
     urlTheme = kwargs.get("urlTheme", None)
     Type = kwargs.get("Type", None)
     thisPageInfo = pageInfo("shows_" + urlTheme + "_rt", "shows_" + urlTheme + "_imdb", "shows_" + urlTheme + "_mc", "shows_" + urlTheme + "_avg", "Best " + category.title() + " Shows on Netflix Now")
+    if country != "usa":
+        thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now")
     if category != "all":
-        shows = Movie.objects.filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
+        shows = Movie.objects.filter(kind=country).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
     else:
-        shows = Movie.objects.filter(Type=Type).order_by(sortBy)[:50]
+        shows = Movie.objects.filter(kind=country).filter(Type=Type).order_by(sortBy)[:50]
     return render(request, 'nfs/movie_list.html', {'movies': shows, 'pageInfo':thisPageInfo})
 
 def about(request):
@@ -85,3 +58,6 @@ def privacy(request):
 
 def contact(request):
     return render(request, 'nfs/contact.html')
+
+def countries(request):
+    return render(request, 'nfs/countries.html')

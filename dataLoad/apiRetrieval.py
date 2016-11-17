@@ -107,14 +107,7 @@ def changeAttributeTypes(movie):
         movie["average"] = 0
         pass
     try:
-        runtime = movie["Runtime"]
-        runtime = re.findall('\d+', runtime)
-        if int(runtime[0]) > 60:
-            movie["kind"] = "movie"
-        elif runtime[0] == "N/A":
-            movie["kind"] = "show"
-        else:
-            movie["kind"] = "show"
+        movie["kind"] = "canada"    
     except IndexError:
         pass
     return movie 
@@ -126,7 +119,8 @@ def getAllMovieInfo(aList):
     x = 0
     for movie in aList:
         dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
-        addThis =  getMovieInfo(movie)
+     
+        addThis =  getMovieInfo(movie[1:])
         if addThis['Response'] is 'True':        
            addThis['Poster'] = getMoviePoster(addThis)
            dictTemplate["fields"] = changeAttributeTypes(addThis) 

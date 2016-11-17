@@ -15,7 +15,7 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li class="dropdown">
-                  <a href="{% url 'movies_main_avg' %}" class="dropbtn">Top Movies</a>
+                  <a href="{% url 'movies_all_avg' %}" class="dropbtn">Top Movies</a>
                 <div class="dropdown-content">
                   <a href="{% url 'movies_action_avg' %}">Action</a>
                   <a href="{% url 'movies_adventure_avg' %}">Adventure</a>
@@ -56,7 +56,7 @@
                       <a href="{% url 'shows_war_avg' %}">War</a>
                   </div>
                 </li>
-                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'countries' %}">Countries</a></li>
            </ul>
           </div>
         </nav>
@@ -91,7 +91,7 @@
               </div>
         <footer class="navbar navbar-bottom centered">
             <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
-            <a href="/">//</a>
+            <li><a href="{% url 'about' %}">About</a></li>            
             <a href="{% url 'contact' %}">Contact</a>
         </footer>     
     </body>

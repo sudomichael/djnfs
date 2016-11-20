@@ -20,7 +20,7 @@ class pageInfo(object):
 
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
-    return render(request, 'nfs/movie_detail.html', {'movie': movie})
+    return render(request, 'nfs/movie_detail.html', {'movie': movie,'movie_links':base_movie_urls, 'show_links':base_show_urls})
 
 class location(object):
     everything = ""

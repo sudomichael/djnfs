@@ -13,47 +13,47 @@
           <div class="container">
             <a id="title" href="/">Netflix Wizard</a>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li class="dropdown">
-                  <a href="{% url 'movies_all_avg' %}" class="dropbtn">Top Movies</a>
+                <li><a href="{% url movie_links.everything %}">Home </a></li>
+                <li class="dropdown"> 
+                 <a href="{% url movie_links.everything %}" class="dropbtn">Top Movies</a>
                 <div class="dropdown-content">
-                  <a href="{% url 'movies_action_avg' %}">Action</a>
-                  <a href="{% url 'movies_adventure_avg' %}">Adventure</a>
-                  <a href="{% url 'movies_anime_avg' %}">Animation</a>     
-                  <a href="{% url 'movies_biography_avg' %}">Biography</a>
-                  <a href="{% url 'movies_comedy_avg' %}">Comedy</a>
-                  <a href="{% url 'movies_crime_avg' %}">Crime</a>
-                  <a href="{% url 'movies_documentary_avg' %}">Documentary</a>
-                  <a href="{% url 'movies_drama_avg' %}">Drama</a>
-                  <a href="{% url 'movies_family_avg' %}">Family</a>
-                  <a href="{% url 'movies_fantasy_avg' %}">Fantasy</a>
-                  <a href="{% url 'movies_history_avg' %}">History</a>    
-                  <a href="{% url 'movies_horror_avg' %}">Horror</a>
-                  <a href="{% url 'movies_music_avg' %}">Music</a>
-                  <a href="{% url 'movies_mystery_avg' %}">Mystery</a>
-                  <a href="{% url 'movies_romance_avg' %}">Romance</a>
-                  <a href="{% url 'movies_scifi_avg' %}">Sci-Fi</a>
-                  <a href="{% url 'movies_sports_avg' %}">Sports</a>
-                  <a href="{% url 'movies_thriller_avg' %}">Thriller</a>
-                  <a href="{% url 'movies_war_avg' %}">War</a>
-                  <a href="{% url 'movies_western_avg' %}">Western</a> 
+                  <a href="{% url movie_links.action %}">Action</a>
+                  <a href="{% url movie_links.adventure %}">Adventure</a>
+                  <a href="{% url movie_links.animation %}">Animation</a>     
+                  <a href="{% url movie_links.biography %}">Biography</a>
+                  <a href="{% url movie_links.comedy %}">Comedy</a>
+                  <a href="{% url movie_links.crime %}">Crime</a>
+                  <a href="{% url movie_links.documentary %}">Documentary</a>
+                  <a href="{% url movie_links.drama %}">Drama</a>
+                  <a href="{% url movie_links.family %}">Family</a>
+                  <a href="{% url movie_links.fantasy %}">Fantasy</a>
+                  <a href="{% url movie_links.history %}">History</a>    
+                  <a href="{% url movie_links.horror %}">Horror</a>
+                  <a href="{% url movie_links.music %}">Music</a>
+                  <a href="{% url movie_links.mystery %}">Mystery</a>
+                  <a href="{% url movie_links.romance %}">Romance</a>
+                  <a href="{% url movie_links.scifi %}">Sci-Fi</a>
+                  <a href="{% url movie_links.sports %}">Sports</a>
+                  <a href="{% url movie_links.thriller %}">Thriller</a>
+                  <a href="{% url movie_links.war %}">War</a>
+                  <a href="{% url movie_links.western%}">Western</a> 
                </div>
                 </li>
                 <li class="dropdown"><a href="">Top Shows</a>
                   <div class="dropdown-content">
-                      <a href="{% url 'shows_all_avg' %}">All</a>
-                      <a href="{% url 'shows_action_avg' %}">Action</a>
-                      <a href="{% url 'shows_adventure_avg' %}">Adventure</a>
-                      <a href="{% url 'shows_anime_avg' %}">Animation</a>
-                      <a href="{% url 'shows_comedy_avg' %}">Comedy</a>
-                      <a href="{% url 'shows_crime_avg' %}">Crime</a>
-                      <a href="{% url 'shows_documentary_avg' %}">Documentary</a>
-                      <a href="{% url 'shows_family_avg' %}">Family</a>
-                      <a href="{% url 'shows_fantasy_avg' %}">Fantasy</a>
-                      <a href="{% url 'shows_horror_avg' %}">Horror</a>
-                      <a href="{% url 'shows_music_avg' %}">Music</a>
-                      <a href="{% url 'shows_reality_avg' %}">Reality-TV</a>
-                      <a href="{% url 'shows_war_avg' %}">War</a>
+                      <a href="{% url show_links.everything %}">All</a>
+                      <a href="{% url show_links.action %}">Action</a>
+                      <a href="{% url show_links.adventure %}">Adventure</a>
+                      <a href="{% url show_links.animation %}">Animation</a>
+                      <a href="{% url show_links.comedy %}">Comedy</a>
+                      <a href="{% url show_links.crime %}">Crime</a>
+                      <a href="{% url show_links.documentary %}">Documentary</a>
+                      <a href="{% url show_links.family %}">Family</a>
+                      <a href="{% url show_links.fantasy %}">Fantasy</a>
+                      <a href="{% url show_links.horror %}">Horror</a>
+                      <a href="{% url show_links.music %}">Music</a>
+                      <a href="{% url show_links.reality %}">Reality-TV</a>
+                      <a href="{% url show_links.war %}">War</a>
                   </div>
                 </li>
                 <li><a href="{% url 'countries' %}">Countries</a></li>
@@ -91,7 +91,7 @@
               </div>
         <footer class="navbar navbar-bottom centered">
             <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
-            <li><a href="{% url 'about' %}">About</a></li>            
+            <a href="{% url 'about' %}"> - About - </a>
             <a href="{% url 'contact' %}">Contact</a>
         </footer>     
     </body>

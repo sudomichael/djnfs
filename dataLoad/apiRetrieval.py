@@ -42,9 +42,7 @@ def getMovieInfo(movieName):
         almostReadyResponse = response.content[2:-2]
         readyResponse = eval(almostReadyResponse)
         return(readyResponse)
-    except SocketError as e:
-        if e.errno != errno.ECONNRESET:
-            raise
+    except (SocketError, SyntaxError) as e:
         pass
 
 import tmdbsimple as tmdb
@@ -107,7 +105,7 @@ def changeAttributeTypes(movie):
         movie["average"] = 0
         pass
     try:
-        movie["kind"] = "canada"    
+        movie["kind"] = "usa"    
     except IndexError:
         pass
     return movie 

@@ -119,13 +119,16 @@ def getAllMovieInfo(aList):
         dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
      
         addThis =  getMovieInfo(movie[1:])
-        if addThis['Response'] is 'True':        
-           addThis['Poster'] = getMoviePoster(addThis)
-           dictTemplate["fields"] = changeAttributeTypes(addThis) 
-           if dictTemplate["fields"] != previousMovie["fields"]:
-               movies.append(dictTemplate)
-               print(addThis["Title"])
-               x += 1
+        try:
+           if addThis['Response'] is 'True':        
+               addThis['Poster'] = getMoviePoster(addThis)
+               dictTemplate["fields"] = changeAttributeTypes(addThis) 
+               if dictTemplate["fields"] != previousMovie["fields"]:
+                   movies.append(dictTemplate)
+                   print(addThis["Title"])
+                   x += 1
+        except TypeError:
+            pass
         previousMovie = dictTemplate                
         time.sleep(.22)
         # API only accepts 40 calls per 10 seconds

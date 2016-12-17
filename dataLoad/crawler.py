@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def redditSpider():
-    URL = 'http://usa.netflixable.com/2016/11/complete-alphabetical-list-wed-nov-30.html'
+    URL = 'http://usa.netflixable.com/2016/12/complete-alphabetical-list-thu-dec-15.html'
     source = requests.get(URL)
     Soup = BeautifulSoup(source.text, "html.parser")
     fw = open('movies.txt', 'w')

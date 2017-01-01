@@ -77,6 +77,15 @@ def movies_genre(request, **kwargs):
     country = kwargs.get("kind", None)
     category = kwargs.get("category", None)
     sortBy = kwargs.get("sortBy", None)
+    sortClass = ["unsorted", "unsorted", "unsorted", "unsorted"]
+    if sortBy == "-tomatoMeter":
+        sortClass[0] = "sorted"
+    elif sortBy == "-imdbRating":
+        sortClass[1] = "sorted"
+    elif sortBy == "-Metascore":
+        sortClass[2] = "sorted"
+    elif sortBy == "-average":
+        sortClass[3] = "sorted"
     urlTheme = kwargs.get("urlTheme", None)
     Type = kwargs.get("Type", None)
     global where
@@ -92,12 +101,21 @@ def movies_genre(request, **kwargs):
         movies = Movie.objects.filter(Genre__contains=category).filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
     else:
         movies = Movie.objects.filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).order_by(sortBy)[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':thisPageInfo, 'movie_links':movie_urls, 'show_links':show_urls})
+    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':thisPageInfo, 'movie_links':movie_urls, 'show_links':show_urls, 'sortClass':sortClass})
 
 def shows_genre(request, **kwargs):
     country = kwargs.get("kind", None)
     category = kwargs.get("category", None)
     sortBy = kwargs.get("sortBy", None)
+    sortClass = ["unsorted", "unsorted", "unsorted", "unsorted"]
+    if sortBy == "-tomatoMeter":
+        sortClass[0] = "sorted"
+    elif sortBy == "-imdbRating":
+        sortClass[1] = "sorted"
+    elif sortBy == "-Metascore":
+        sortClass[2] = "sorted"
+    elif sortBy == "-average":
+        sortClass[3] = "sorted"
     urlTheme = kwargs.get("urlTheme", None)
     Type = kwargs.get("Type", None)
     global where
@@ -113,7 +131,7 @@ def shows_genre(request, **kwargs):
         shows = Movie.objects.filter(kind=country).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
     else:
         shows = Movie.objects.filter(kind=country).filter(Type=Type).order_by(sortBy)[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': shows, 'pageInfo':thisPageInfo,'movie_links':movie_urls, 'show_links': show_urls})
+    return render(request, 'nfs/movie_list.html', {'movies': shows, 'pageInfo':thisPageInfo,'movie_links':movie_urls, 'show_links': show_urls, 'sortClass':sortClass})
 
 def about(request):
     return render(request, 'nfs/about.html')

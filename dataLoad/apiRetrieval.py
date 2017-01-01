@@ -105,7 +105,7 @@ def changeAttributeTypes(movie):
         movie["average"] = 0
         pass
     try:
-        movie["kind"] = "canada"    
+        movie["kind"] = "usa"    
     except IndexError:
         pass
     return movie 

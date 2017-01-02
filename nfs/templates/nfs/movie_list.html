@@ -20,13 +20,26 @@
     .sorted{
         background-color: rgba(0, 0, 0, 0.075);
     }
-</style>
+    content {
+        width: 80% !important!;
+    }
+   </style>
 <h1 class="header">{{ pageInfo.title }}</h1>
-
 <table class="table table-hover">
   <thead>
     <tr>
-      <th></th>
+      <th>
+          <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+                fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-btn">
+                <div class="fb-share-button" data-href="http://www.netflixwizard.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.netflixwizard.com%2F&amp;src=sdkpreparse">Share</a></div> </div>
+</th>
       <th></th>
       <th><a href="{% url pageInfo.rturl %}"> Tomato Rating</a></th>
       <th><a href="{% url pageInfo.imdburl %}">IMDb Rating</a></th>
@@ -34,9 +47,9 @@
       <th><a href="{% url pageInfo.avgurl %}">Average <i class="fa fa-sort" aria-hidden="true"></i></a></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="vertical-align: middle">
     {% for movie in movies %}
-      <tr style="vertical-align: middle;">
+      <tr>
            <td><img class="img-responsive img-rounded" src="{{ movie.Poster }}" alt=""></td>
            <td class="title"><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.Title }}</a> ({{ movie.Year }})</td>
            <td class='{{ sortClass.0 }}'>{{ movie.tomatoMeter }}</td>
@@ -45,6 +58,7 @@
            <td class='{{ sortClass.3 }}'>{{ movie.average }}</td>
       </tr>
     {% endfor %} 
+  </tbody>
 </table>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- Responsive -->

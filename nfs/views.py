@@ -134,13 +134,13 @@ def shows_genre(request, **kwargs):
     return render(request, 'nfs/movie_list.html', {'movies': shows, 'pageInfo':thisPageInfo,'movie_links':movie_urls, 'show_links': show_urls, 'sortClass':sortClass})
 
 def about(request):
-    return render(request, 'nfs/about.html')
+    return render(request, 'nfs/about.html', {'movie_links':base_movie_urls, 'show_links':base_show_urls})
 
 def privacy(request):
-    return render(request, 'nfs/privacy.html')
+    return render(request, 'nfs/privacy.html', {'movie_links':base_movie_urls, 'show_links':base_show_urls})
 
 def contact(request):
-    return render(request, 'nfs/contact.html')
+    return render(request, 'nfs/contact.html', {'movie_links':base_movie_urls, 'show_links':base_show_urls})
 
 def countries(request):
     return render(request, 'nfs/countries.html', {'movie_links':base_movie_urls, 'show_links':base_show_urls})

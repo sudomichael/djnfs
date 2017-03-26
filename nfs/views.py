@@ -98,10 +98,14 @@ def movies_genre(request, **kwargs):
         show_urls = location(where, "shows")
         thisPageInfo = pageInfo(country + "_movies_" + urlTheme + "_rt", country + "_movies_" + urlTheme +"_imdb", country + "_movies_" + urlTheme + "_mc", country + "_movies_" + urlTheme + "_avg", "Best " + category.title() + " Movies on Netflix Right Now in " + country.title())
     if category != "all":
-        movies = Movie.objects.filter(Genre__contains=category).filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
+        message = ""
+        movies = Movie.objects.filter(Genre__contains=category).filter(kind=country).filter(tomatoMeter__gte=0).filter(Metascore__gte=1).filter(Type=Type).filter(Genre__contains=category).order_by(sortBy)[:50]
     else:
-        movies = Movie.objects.filter(kind=country).filter(tomatoMeter__gte=1).filter(Metascore__gte=1).filter(Type=Type).order_by(sortBy)[:50]
-    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':thisPageInfo, 'movie_links':movie_urls, 'show_links':show_urls, 'sortClass':sortClass})
+        message = ""
+        if sortBy == "-average":
+            message = "Dear users - Tomato Ratings are temporarily unavailable. We apologize for the inconvenience."
+        movies = Movie.objects.filter(kind=country).filter(tomatoMeter__gte=0).filter(Metascore__gte=1).filter(Type=Type).order_by(sortBy)[:50]
+    return render(request, 'nfs/movie_list.html', {'movies': movies, 'pageInfo':thisPageInfo, 'movie_links':movie_urls, 'show_links':show_urls, 'sortClass':sortClass, 'message':message})
 
 def shows_genre(request, **kwargs):
     country = kwargs.get("kind", None)

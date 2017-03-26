@@ -63,33 +63,39 @@ def changeAttributeTypes(movie):
     try:   
         if movie["Website"] == "N/A":
             movie["Website"] = "/"
-    except ValueError:
+    except ValueError as e:
+        print(e)
         movie["Poster"] = 0
         pass
     try:
         movie["imdbRating"] = float(movie["imdbRating"])
-    except ValueError:
+    except ValueError as e:
+        print(e)
         movie["imdbRating"] = 0 
         pass
     try:    
         movie["tomatoMeter"] = int(movie["tomatoMeter"])
-    except ValueError:
+        print(movie["tomatoMeter"])
+    except ValueError as e:
+        print(e)
         movie["tomatoMeter"] = 0
         pass    
     try:
         movie["tomatoUserMeter"] = int(movie["tomatoUserMeter"])
-    except ValueError:
+    except ValueError as e:
         movie["tomatoUserMeter"] = 0
         pass
     try:    
         yearString = movie["Year"][:4]
         movie["Year"] = int(yearString)
-    except ValueError:
+    except ValueError as e:
+        print(e)
         movie["Year"] = 0
         pass
     try:
         movie["Metascore"] = int(movie["Metascore"])
-    except ValueError:
+    except ValueError as e:
+        print(e)
         movie["Metascore"] = 0
         pass
     try:
@@ -101,12 +107,14 @@ def changeAttributeTypes(movie):
         if movie["imdbRating"] != 0:
             divideBy += 1
         movie["average"] = round(((movie["Metascore"] + movie["tomatoMeter"] + (movie["imdbRating"] * 10)) / divideBy), 1)
-    except ZeroDivisionError:
+    except ZeroDivisionError as e:
+        print(e)
         movie["average"] = 0
         pass
     try:
         movie["kind"] = "usa"    
-    except IndexError:
+    except IndexError as e:
+        print(e)
         pass
     return movie 
 previousMovie = "startValue"
@@ -119,6 +127,7 @@ def getAllMovieInfo(aList):
         dictTemplate = {"model": "nfs.Movie", "pk": x, "fields": "none"}
      
         addThis =  getMovieInfo(movie[1:])
+        print(addThis)
         try:
            if addThis['Response'] is 'True':        
                addThis['Poster'] = getMoviePoster(addThis)
@@ -127,7 +136,8 @@ def getAllMovieInfo(aList):
                    movies.append(dictTemplate)
                    print(addThis["Title"])
                    x += 1
-        except TypeError:
+        except TypeError as e:
+            print(e)
             pass
         previousMovie = dictTemplate                
         time.sleep(.22)

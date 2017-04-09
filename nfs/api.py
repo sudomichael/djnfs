@@ -1,4 +1,5 @@
 from tastypie.resources import ModelResource
+from tastypie.authorization import Authorization
 from nfs.models import Movie
 
 class MovieResource(ModelResource):

@@ -1,8 +1,11 @@
 from django.conf.urls import url, include
 from . import views
+from tastypie.api import Api
 from nfs.api import MovieResource
 
-movie_resource = MovieResource()
+v1_api = Api(api_name='v1')
+v1_api.register(MovieResource())
+
 
 urlpatterns = [
     url(r'^$', views.movies_genre, {'category': "all", "sortBy":"-average", "urlTheme":"all", "kind":"usa", "Type":"movie"}, name="movies_main_avg"),
@@ -291,5 +294,5 @@ urlpatterns = [
     url(r'^canada/netflixshows/war/rt$', views.shows_genre, {'category': "War", "sortBy": "-tomatoMeter", "urlTheme": "war", "Type":"series", "kind":"canada"}, name="canada_shows_war_rt"),
     url(r'^canada/netflixshows/warl/imdb$', views.shows_genre, {'category': "War", "sortBy": "-imdbRating", "urlTheme": "war", "Type":"series", "kind":"canada"}, name="canada_shows_war_imdb"),
     url(r'^canada/netflixshows/war/mc$', views.shows_genre, {'category': "War", "sortBy": "-Metascore", "urlTheme": "war", "Type":"series", "kind":"canada"}, name="canada_shows_war_mc"),
-    url(r'^api/', include(movie_resource.urls)),
+    url(r'^api/', include(v1_api.urls)),
 ]   
